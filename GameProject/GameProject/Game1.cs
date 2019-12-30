@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameProject
 {
@@ -15,6 +17,7 @@ namespace GameProject
         Player player;
         Camera camera;
         Remote remote;
+        
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -26,7 +29,7 @@ namespace GameProject
         {
             background = new Background();
             remote = new KeyBoard();
-            map = new Map();
+            map = new Map();           
             player = new Player(Content,remote);
             base.Initialize();
         }
@@ -40,7 +43,7 @@ namespace GameProject
             //content meegeven aan tiles
             Tiles.Content = Content;
             //Sounds.Content = Content;
-
+            Sounds.Load(Content);
 
             map.setLevel("level1"); //welklevel
             map.GenerateLevel();            
@@ -48,7 +51,7 @@ namespace GameProject
 
 
             //play background music
-            //Sounds.playBackgroundMusic(50);                
+            Sounds.playBackgroundMusic(50);                
         }
 
         
@@ -78,7 +81,8 @@ namespace GameProject
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
             background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
             map.DrawLevel(spriteBatch);
-            player.Draw(spriteBatch);     
+            player.Draw(spriteBatch);   
+            
             spriteBatch.End();
             base.Draw(gameTime);
         }
