@@ -148,7 +148,7 @@ namespace GameProject
                 position.Y -= 5f;
                 velocity.Y = -9f;
                 hasJumped = true;
-                //Sounds.effect.Play(0.5f, 0, 0); //Jumpsound
+                Sounds.effect.Play(0.5f, 0, 0); //Jumpsound
             }
 
             if (remote.idle)

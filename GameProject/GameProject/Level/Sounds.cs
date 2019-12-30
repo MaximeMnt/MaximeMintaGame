@@ -11,17 +11,14 @@ namespace GameProject
 {
      class Sounds
     {
-        private static ContentManager content;
-        public static ContentManager Content
+        public static SoundEffect effect;
+        public static Song BackgroundMusic;
+
+        public static void Load(ContentManager content)
         {
-            protected get { return content; }
-            set { content = value; }
-        }
-
-        public static SoundEffect effect= Content.Load<SoundEffect>("Jump.wav");
-        public static Song BackgroundMusic = Content.Load<Song>("BackgroundMusic.wav");
-
-        
+           effect = content.Load<SoundEffect>("Jump");
+           BackgroundMusic = content.Load<Song>("BackgroundMusic");
+        }             
      
         public static void playBackgroundMusic(int volume)
         {
