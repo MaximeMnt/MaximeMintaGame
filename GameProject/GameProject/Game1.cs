@@ -48,7 +48,7 @@ namespace GameProject
             remote = new KeyBoard();
             map = new Map(Content);           
             player = new Player(remote);
-            F = new Fruit(Content, new Vector2(0, 900)); //TEMP
+            F = new Fruit(new Vector2(0, 900)); //TEMP
             base.Initialize();
 
         }
@@ -63,13 +63,12 @@ namespace GameProject
             Tiles.Content = Content;
             Sounds.Load(Content);
             Resources.LoadImages(Content);
-
-            F.Load();
+           
             map.setLevel(1); //welklevel
-            map.GenerateLevel();            
+            map.GenerateLevel();
+
             player.Load();
-
-
+            F.Load();
             //play background music
             Sounds.playBackgroundMusic(50);                
         }

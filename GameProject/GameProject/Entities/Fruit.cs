@@ -16,14 +16,11 @@ namespace GameProject
         //private Vector2 position;
         Animation FruitIdleAnimation;
         public Rectangle rectangle;
-        private ContentManager content;
 
-        public Fruit(ContentManager _content, Vector2 position)
-        {          
-            this.content = _content;
+        public Fruit( Vector2 position)
+        {
             //this.texture = content.Load<Texture2D>("Pineapple/Pineapple1");
-
-
+            Load();
             //IDLE ANIMATION
             CreateAnimationIdle();
 
@@ -58,7 +55,7 @@ namespace GameProject
 
         public override void Load()
         {
-            this.texture = Resources.Images["Pineapple/Pineapple1"];
+            texture = Resources.Images["Pineapple/Pineapple1"];
             rectangle = new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height);
 
         }
@@ -70,7 +67,7 @@ namespace GameProject
         public override void Draw(SpriteBatch spriteBatch)
         {
           //spriteBatch.Draw(texture, position, FruitIdleAnimation.currentFrame.SourceRectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 0, SpriteEffects.None, 1);
-           //spriteBatch.Draw(texture, position, Color.White); //TEXTURE IS NULL?
+           spriteBatch.Draw(texture, position, Color.White); //TEXTURE IS NULL?
         }  
     }
 }

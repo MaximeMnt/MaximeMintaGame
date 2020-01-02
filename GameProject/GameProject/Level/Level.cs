@@ -44,7 +44,7 @@ namespace GameProject
                     if (number == 10)
                     {
                         Vector2 pos = new Vector2((x * size), (y * size));
-                        fruits.Add(new Fruit(content,pos)); 
+                        fruits.Add(new Fruit(pos)); 
                     }
                     width = (x + 1) * size;
                     height = (y + 1) * size;
