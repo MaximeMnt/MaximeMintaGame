@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,9 @@ namespace GameProject
 {
     class Map
     {
+        public ContentManager content;
         public Level level1, level2;
+        public Background background;
 
         int[,] level1Array = new int[,] {
             {0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 },
@@ -26,7 +30,7 @@ namespace GameProject
             {2 ,2 ,2 ,2 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,2 ,2 ,0 ,0 ,0 ,0 ,2 ,2 ,2 },
             {0 ,0 ,0 ,0 ,0 ,0 ,2 ,2 ,2 ,2 ,0 ,0 ,0 ,2 ,2 ,2 ,2 ,0 ,0 ,2 ,0 ,0 ,0 ,0 },
             {0 ,0 ,0 ,0 ,0 ,2 ,2 ,0 ,0 ,0 ,0 ,0 ,2 ,2 ,2 ,2 ,2 ,0 ,2 ,2 ,2 ,0 ,0 ,0 },
-            {0 ,0 ,0 ,0 ,2 ,2 ,2 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 },
+            {0 ,10 ,0 ,0 ,2 ,2 ,2 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 },
             {1 ,1 ,1 ,1 ,2 ,2 ,2 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 ,1 }
         };
 
@@ -53,23 +57,25 @@ namespace GameProject
         public Level LevelCurrent;
 
 
-        public Map()
+        public Map(ContentManager _content)
         {
+            this.content = _content;
             Init();
         }
 
         public void Init()
         {
-            level1 = new Level();
-            level2 = new Level();
+            level1 = new Level(content);
+            level2 = new Level(content);
+            background = new Background();
         }
 
-        public void setLevel(string level)
+        public void setLevel(int level)
         {
-            if (level == "level1")
+            if (level == 1)
             {
                 LevelCurrent = level1;
-            } else if(level == "level2")
+            } else if(level == 2)
             {
                 LevelCurrent = level2;
             }         
@@ -77,6 +83,7 @@ namespace GameProject
 
         public void GenerateLevel()
         {
+            background.LoadTexture(content.Load<Texture2D>("Background"));
             level1.Generate(level1Array, 64);            
         }
 
@@ -88,6 +95,7 @@ namespace GameProject
 
         public void DrawLevel(SpriteBatch spriteBatch)
         {
+            background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
             LevelCurrent.Draw(spriteBatch); 
         }
     }

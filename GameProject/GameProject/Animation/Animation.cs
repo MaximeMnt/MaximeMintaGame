@@ -13,29 +13,40 @@ namespace GameProject
         private List<AnimationFrame> frames;
         public AnimationFrame currentFrame;
         private double xOffset;
-        int counter = 0, speed;
+        int counter = 0,speed;
 
         public Animation(int _speed)
         {
             frames = new List<AnimationFrame>(); ;
             xOffset = 0;
-            speed = _speed;
+           // speed = _speed;
         }
 
-        public void AddFrame(Texture2D texture)
+        //public void AddFrame(Texture2D texture)
+        //{
+        //    AnimationFrame frame = new AnimationFrame()
+        //    {
+        //        SourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height),
+        //        SourceTexture = texture
+        //    };
+        //    frames.Add(frame);
+        //    currentFrame = frames[0];
+        //}
+
+        public void AddFrame(Rectangle rectangle)
         {
             AnimationFrame frame = new AnimationFrame()
             {
-                SourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height),
-                SourceTexture = texture
+                SourceRectangle = rectangle               
             };
+
             frames.Add(frame);
             currentFrame = frames[0];
         }
 
         public void Update(GameTime gameTime)
         {
-            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / speed;
+            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / 180;
             if (xOffset >= currentFrame.SourceRectangle.Width)
             {
                 counter++;

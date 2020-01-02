@@ -9,15 +9,33 @@ namespace GameProject
     //MAXIME MINTA 2EA2-CLOUD
     public class Game1 : Game
     {
+
+        enum gameState
+        {
+            Playing,
+            Menu,
+            End
+        }
+        gameState currentGameState = gameState.Menu;
+
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Background background;
+        
+        //VISUAL
         Map map;
-        Player player;
+
+        //MISC
         Camera camera;
         Remote remote;
+
+        //ENTITIES
+        Player player;
+        Fruit F;
+
         
+       
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -27,27 +45,29 @@ namespace GameProject
         
         protected override void Initialize()
         {
-            background = new Background();
             remote = new KeyBoard();
-            map = new Map();           
-            player = new Player(Content,remote);
+            map = new Map(Content);           
+            player = new Player(remote);
+            F = new Fruit(Content, new Vector2(0, 900)); //TEMP
             base.Initialize();
+
         }
 
 
         protected override void LoadContent()
         {
-            background.LoadTexture(Content.Load<Texture2D>("Background"));
             spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera(GraphicsDevice.Viewport);
+            
             //content meegeven aan tiles
             Tiles.Content = Content;
-            //Sounds.Content = Content;
             Sounds.Load(Content);
+            Resources.LoadImages(Content);
 
-            map.setLevel("level1"); //welklevel
+            F.Load();
+            map.setLevel(1); //welklevel
             map.GenerateLevel();            
-            player.Load(Content);
+            player.Load();
 
 
             //play background music
@@ -63,13 +83,14 @@ namespace GameProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            F.Update(gameTime);
             player.Update(gameTime);
 
             //Collision&CameraMovement
             foreach (CollisionTiles item in map.LevelCurrent.CollisionTiles)
             {
                 player.Collision(item.Rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
-                camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
+                camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);                         
             }
 
             base.Update(gameTime);
@@ -79,11 +100,11 @@ namespace GameProject
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
-            background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
             map.DrawLevel(spriteBatch);
-            player.Draw(spriteBatch);   
-            
+            player.Draw(spriteBatch);
+            F.Draw(spriteBatch);
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }
