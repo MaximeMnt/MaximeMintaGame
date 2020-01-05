@@ -233,7 +233,7 @@ namespace GameProject
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, rectangle, Color.White);
-            //spriteBatch.Draw(texture, position, rectangle, Color.Red, 0f, new Vector2(0, 0), 0f, sprEff, 1);
+            //spriteBatch.Draw(texture, position, rectangle, Color.Red, 0f, new Vector2(0, 0), 1f, sprEff, 0);
             //spriteBatch.Draw(texture, position, currentAnimation.currentFrame.SourceRectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 3, sprEff, 1);
 
         }
