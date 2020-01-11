@@ -32,7 +32,6 @@ namespace GameProject
 
         //ENTITIES
         Player player;
-        Fruit F;
 
         
        
@@ -48,7 +47,6 @@ namespace GameProject
             remote = new KeyBoard();
             map = new Map(Content);           
             player = new Player(remote);
-            F = new Fruit(new Vector2(0, 900)); //TEMP
             base.Initialize();
 
         }
@@ -58,17 +56,16 @@ namespace GameProject
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera(GraphicsDevice.Viewport);
-            
+
             //content meegeven aan tiles
+            Resources.LoadImages(Content);
             Tiles.Content = Content;
             Sounds.Load(Content);
-            Resources.LoadImages(Content);
            
             map.setLevel(1); //welklevel
             map.GenerateLevel();
 
             player.Load();
-            F.Load();
             //play background music
             Sounds.playBackgroundMusic(50);                
         }
@@ -82,7 +79,6 @@ namespace GameProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            F.Update(gameTime);
             player.Update(gameTime);
 
             //Collision&CameraMovement
@@ -101,7 +97,6 @@ namespace GameProject
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
             map.DrawLevel(spriteBatch);
             player.Draw(spriteBatch);
-            F.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

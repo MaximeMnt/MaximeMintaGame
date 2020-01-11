@@ -182,9 +182,6 @@ namespace GameProject
             {
                 velocity.Y = 1f;
             }
-
-
-
             if (position.X < 0)
             {
                 position.X = 0;
