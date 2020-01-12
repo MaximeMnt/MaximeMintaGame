@@ -88,6 +88,11 @@ namespace GameProject
                 camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);                         
             }
 
+            foreach (Fruit item in map.LevelCurrent.Fruits)
+            {
+                player.Collision(item.rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
+            }
+
             base.Update(gameTime);
         }
         protected override void Draw(GameTime gameTime)

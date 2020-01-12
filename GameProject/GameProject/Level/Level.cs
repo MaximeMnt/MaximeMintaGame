@@ -17,13 +17,17 @@ namespace GameProject
             get { return collisionTiles; }
         }
         private List<Fruit> fruits = new List<Fruit>();
+        public List<Fruit> Fruits
+        {
+            get { return fruits; }
+        }
         ContentManager content;
 
         private int width, height;
 
         public int Width { get { return width; } }
         public int Heigt { get { return height; } }
-
+          
 
         public Level(ContentManager _content)
         {
@@ -42,9 +46,8 @@ namespace GameProject
                         collisionTiles.Add(new CollisionTiles(number, new Microsoft.Xna.Framework.Rectangle(x * size, y * size, size, size)));
                     }
                     if (number == 10)
-                    {
-                        Vector2 pos = new Vector2((x * size), (y * size));
-                        fruits.Add(new Fruit(pos)); 
+                    {                      
+                        fruits.Add(new Fruit(new Vector2((x * size), (y * size)))); 
                     }
                     width = (x + 1) * size;
                     height = (y + 1) * size;

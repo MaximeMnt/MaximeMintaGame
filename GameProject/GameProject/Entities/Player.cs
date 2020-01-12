@@ -157,9 +157,7 @@ namespace GameProject
             {
                 currentAnimation = animationIdle;
             }
-
-
-        }
+        }    
 
         public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
         {

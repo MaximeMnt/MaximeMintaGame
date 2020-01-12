@@ -11,21 +11,17 @@ namespace GameProject
 {
     class Fruit : Entity
     {
-        private Vector2 position = new Vector2(0, 900);       
+        private Vector2 position;       
         private Texture2D texture;      
-        //private Vector2 position;
         Animation FruitIdleAnimation;
         public Rectangle rectangle;
 
         public Fruit( Vector2 position)
-        {
-            //this.texture = content.Load<Texture2D>("Pineapple/Pineapple1");
+        {            
             Load();
             //IDLE ANIMATION
             CreateAnimationIdle();
-
             this.position = position;
-
         }
 
 
@@ -57,7 +53,6 @@ namespace GameProject
         {
             texture = Resources.Images["Pineapple/Pineapple1"];
             rectangle = new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height);
-
         }
         public override void Update(GameTime gameTime)
         {
@@ -66,9 +61,10 @@ namespace GameProject
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, position, FruitIdleAnimation.currentFrame.SourceRectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 0, SpriteEffects.None, 1);
-            
-            spriteBatch.Draw(texture, position, Color.White); //TEXTURE IS NULL?
-        }  
+            spriteBatch.Draw(texture, position, this.rectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 1.5f, SpriteEffects.None, 1);
+            //spriteBatch.Draw(texture, position, FruitIdleAnimation.currentFrame.SourceRectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 1.5f, SpriteEffects.None, 1);
+
+            //spriteBatch.Draw(texture, position, Color.White); //TEXTURE IS NULL?
+        }
     }
 }
