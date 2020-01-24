@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 namespace GameProject
 {
@@ -88,13 +89,15 @@ namespace GameProject
                 camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);                         
             }
 
-            foreach (Fruit item in map.LevelCurrent.Fruits)
+            foreach (Fruit item in map.LevelCurrent.Fruits.ToArray())
             {
                 item.Update(gameTime);
                 System.Console.WriteLine("fruit: " + item.rectangle);
                 if (player.rectangle.Intersects(item.rectangle))
                 {
-            
+                    int Collide = map.LevelCurrent.Fruits.IndexOf(item);
+                    map.LevelCurrent.Fruits.RemoveAt(Collide);
+                    item.hasTouched();
                     System.Console.WriteLine("TOUCHED!,YEET!");
                 }
 

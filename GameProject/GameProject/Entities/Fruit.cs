@@ -16,6 +16,9 @@ namespace GameProject
         Animation FruitIdleAnimation;
         public Rectangle rectangle;
 
+        private int fruitCount = 4;
+
+
         public Fruit(Vector2 _position)
         {            
             Load();
@@ -25,9 +28,10 @@ namespace GameProject
         }
 
 
-        public void hasTouched()
+        public bool hasTouched()
         {
-
+            fruitCount++;
+            return true;
         }
 
         private void CreateAnimationIdle()
