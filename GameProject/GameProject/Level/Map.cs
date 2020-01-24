@@ -84,15 +84,16 @@ namespace GameProject
         public void GenerateLevel()
         {
             background.LoadTexture(Resources.Images["Background"]);
-            level1.Generate(level1Array, 64);            
-        }
 
-        public void GenerateLevel2()
-        {
-            background.LoadTexture(Resources.Images["Background"]);
-            level2.Generate(level2Array, 64);
-        }
+            if (LevelCurrent == level1)
+            {
+                level1.Generate(level1Array, 64);
+            } else if(LevelCurrent == level2)
+            {
+                level2.Generate(level2Array, 64);
 
+            } 
+        }
 
         public void DrawLevel(SpriteBatch spriteBatch)
         {

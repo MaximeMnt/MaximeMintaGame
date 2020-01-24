@@ -26,6 +26,7 @@ namespace GameProject
         
         //VISUAL
         Map map;
+        int currentLevel = 1;
 
         //MISC
         Camera camera;
@@ -33,7 +34,7 @@ namespace GameProject
 
         //ENTITIES
         Player player;
-
+        key key;
         
        
         public Game1()
@@ -48,7 +49,9 @@ namespace GameProject
             remote = new KeyBoard();
             map = new Map(Content);           
             player = new Player(remote);
+            key = new key();
             base.Initialize();
+            
 
         }
 
@@ -63,9 +66,9 @@ namespace GameProject
             Tiles.Content = Content;
             Sounds.Load(Content);
            
-            map.setLevel(1); //welklevel mag niet gehardcoded worden
+            map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
             map.GenerateLevel();
-
+            key.Load();
             player.Load();
             //play background music
             Sounds.playBackgroundMusic(50);                
@@ -81,6 +84,7 @@ namespace GameProject
                 Exit();
 
             player.Update(gameTime);
+            key.Update(gameTime);
 
             //Collision&CameraMovement
             foreach (CollisionTiles item in map.LevelCurrent.CollisionTiles)
@@ -89,20 +93,24 @@ namespace GameProject
                 camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);                         
             }
 
+            //collision met fruit
             foreach (Fruit item in map.LevelCurrent.Fruits.ToArray())
             {
                 item.Update(gameTime);
-                System.Console.WriteLine("fruit: " + item.rectangle);
                 if (player.rectangle.Intersects(item.rectangle))
                 {
                     int Collide = map.LevelCurrent.Fruits.IndexOf(item);
                     map.LevelCurrent.Fruits.RemoveAt(Collide);
                     item.hasTouched();
-                    System.Console.WriteLine("TOUCHED!,YEET!");
-                }
+                }           
+            }
 
-                
-               // player.Collision(item.rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
+            if (player.rectangle.Intersects(key.rectangle) && Fruit.fruitCount == 0)
+            {
+                currentLevel++;
+                map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
+                map.GenerateLevel();
+                Fruit.fruitCount = 4;
             }
 
             base.Update(gameTime);
@@ -113,11 +121,12 @@ namespace GameProject
 
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
             map.DrawLevel(spriteBatch);
-            player.Draw(spriteBatch);
             foreach (Fruit item in map.LevelCurrent.Fruits)
             {
                 item.Draw(spriteBatch);
             }
+            key.Draw(spriteBatch);
+            player.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

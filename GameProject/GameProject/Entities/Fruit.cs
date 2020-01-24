@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace GameProject
 {
+
     class Fruit : Entity
     {
         private Vector2 position;       
         private Texture2D texture;      
         Animation FruitIdleAnimation;
         public Rectangle rectangle;
+        public static int fruitCount = 4; //DIT MOET NOG AANGEPAST WORDEN
 
-        private int fruitCount = 4;
 
 
         public Fruit(Vector2 _position)
@@ -28,10 +29,9 @@ namespace GameProject
         }
 
 
-        public bool hasTouched()
+        public void hasTouched()
         {
-            fruitCount++;
-            return true;
+            fruitCount--;
         }
 
         private void CreateAnimationIdle()

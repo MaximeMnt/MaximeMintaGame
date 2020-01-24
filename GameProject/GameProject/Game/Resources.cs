@@ -25,7 +25,8 @@ namespace GameProject
                 "Background",
                 "player",
                 "vita",
-                "Pineapple/Pineapple10"
+                "Pineapple/Pineapple10",
+                "key"
             };
 
             foreach (string item in graphics)
