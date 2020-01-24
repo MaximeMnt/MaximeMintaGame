@@ -62,7 +62,7 @@ namespace GameProject
             Tiles.Content = Content;
             Sounds.Load(Content);
            
-            map.setLevel(1); //welklevel
+            map.setLevel(1); //welklevel mag niet gehardcoded worden
             map.GenerateLevel();
 
             player.Load();
