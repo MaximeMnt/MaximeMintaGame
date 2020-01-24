@@ -90,7 +90,16 @@ namespace GameProject
 
             foreach (Fruit item in map.LevelCurrent.Fruits)
             {
-                player.Collision(item.rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
+                item.Update(gameTime);
+                System.Console.WriteLine("fruit: " + item.rectangle);
+                if (player.rectangle.Intersects(item.rectangle))
+                {
+            
+                    System.Console.WriteLine("TOUCHED!,YEET!");
+                }
+
+                
+               // player.Collision(item.rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
             }
 
             base.Update(gameTime);
@@ -102,6 +111,10 @@ namespace GameProject
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
             map.DrawLevel(spriteBatch);
             player.Draw(spriteBatch);
+            foreach (Fruit item in map.LevelCurrent.Fruits)
+            {
+                item.Draw(spriteBatch);
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

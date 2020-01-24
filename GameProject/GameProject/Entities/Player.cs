@@ -16,9 +16,9 @@ namespace GameProject
         //FIELDS
         Animation runAnimation, animationIdle, duckAnimation, duckIdleAnimation, damageAnimation, currentAnimation;
         private Texture2D texture;
-        private Vector2 position= new Vector2(0,900);
+        private Vector2 position = new Vector2(0,900);
         private Vector2 velocity;
-        private Rectangle rectangle;
+        public Rectangle rectangle;
         private SpriteEffects sprEff;
         public int playerHealth = 0;
         private bool hasJumped = false;
@@ -209,8 +209,8 @@ namespace GameProject
         {
 
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
-
+            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); //updaten van de rectangle
+            Console.WriteLine("player: " + rectangle);
             //update Input
             Input(gameTime);
             remote.Update();
@@ -223,14 +223,14 @@ namespace GameProject
             //updaten van animation
             currentAnimation.Update(gameTime);
            
+
+
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, rectangle, Color.White);
-            //spriteBatch.Draw(texture, position, rectangle, Color.Red, 0f, new Vector2(0, 0), 1f, sprEff, 0);
-            //spriteBatch.Draw(texture, position, currentAnimation.currentFrame.SourceRectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 3, sprEff, 1);
-
         }
 
     }

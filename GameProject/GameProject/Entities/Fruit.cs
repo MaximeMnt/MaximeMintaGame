@@ -16,16 +16,19 @@ namespace GameProject
         Animation FruitIdleAnimation;
         public Rectangle rectangle;
 
-        public Fruit( Vector2 position)
+        public Fruit(Vector2 _position)
         {            
             Load();
             //IDLE ANIMATION
             CreateAnimationIdle();
-            this.position = position;
+            this.position = _position;
         }
 
 
-        
+        public void hasTouched()
+        {
+
+        }
 
         private void CreateAnimationIdle()
         {
@@ -51,20 +54,19 @@ namespace GameProject
 
         public override void Load()
         {
-            texture = Resources.Images["Pineapple/Pineapple1"];
+            texture = Resources.Images["Pineapple/Pineapple10"];
             rectangle = new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height);
         }
         public override void Update(GameTime gameTime)
         {
-            FruitIdleAnimation.Update(gameTime);
+            //FruitIdleAnimation.Update(gameTime);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); //updaten van de rectangle
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, this.rectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 1.5f, SpriteEffects.None, 1);
-            //spriteBatch.Draw(texture, position, FruitIdleAnimation.currentFrame.SourceRectangle, Color.AliceBlue, 0f, new Vector2(0, 0), 1.5f, SpriteEffects.None, 1);
-
-            //spriteBatch.Draw(texture, position, Color.White); //TEXTURE IS NULL?
+            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }

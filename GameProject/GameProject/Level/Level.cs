@@ -43,11 +43,12 @@ namespace GameProject
                     int number = map[y, x];
                     if (number > 0 && number != 10)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Microsoft.Xna.Framework.Rectangle(x * size, y * size, size, size)));
+                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(x * size, y * size, size, size)));
                     }
                     if (number == 10)
                     {                      
-                        fruits.Add(new Fruit(new Vector2((x * size), (y * size)))); 
+                        fruits.Add(new Fruit(new Vector2(x * size, y * size)));
+
                     }
                     width = (x + 1) * size;
                     height = (y + 1) * size;
