@@ -105,12 +105,16 @@ namespace GameProject
                 }           
             }
 
-            if (player.rectangle.Intersects(key.rectangle) && Fruit.fruitCount == 0)
+            if (player.rectangle.Intersects(key.rectangle) && Fruit.fruitCount == 0 && currentLevel <= 2)
             {
                 currentLevel++;
                 map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
                 map.GenerateLevel();
                 Fruit.fruitCount = 4;
+            } else if(currentLevel > 2 )
+            {
+                currentGameState = gameState.End;
+                System.Console.WriteLine("GAME END!!!");
             }
 
             base.Update(gameTime);
