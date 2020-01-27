@@ -12,6 +12,7 @@ namespace GameProject
     {
         //FIELDS
         public static Dictionary<string, Texture2D> LoadFile;
+        public static SpriteFont font;
 
         //LOAD
         public static void LoadImages(ContentManager content)
@@ -33,6 +34,11 @@ namespace GameProject
             {
                 LoadFile.Add(item, content.Load<Texture2D>(item));
             }
+        }
+
+        public static void LoadFont(ContentManager content)
+        {
+            font = content.Load<SpriteFont>("File");
         }
     }
 }

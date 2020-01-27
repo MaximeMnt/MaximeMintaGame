@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +24,17 @@ namespace GameProject
         Remote remote;
 
         GraphicsDevice graphicsDevice;
-        
 
+        //Background
+        Texture2D Background;
 
-        public PlayingState(GraphicsDevice _graphicsDevice, Camera _camera):base(_graphicsDevice, _camera)
+        //levelwidth & Heigt
+        public static int levelWidth;
+        public static int levelHeight;
+
+        public PlayingState(GraphicsDevice _graphicsDevice):base(_graphicsDevice)
         {
             this.graphicsDevice = _graphicsDevice;
-            this.camera = _camera;
         }
         public override void Initialize()
         {
@@ -37,16 +42,23 @@ namespace GameProject
             remote = new KeyBoard();
             player = new Player(remote);
             key = new Key();
+            this.camera = new Camera(graphicsDevice.Viewport);
+
+
+
         }
 
         public override void LoadContent()
         {
-            //camera = new Camera(graphicsDevice.Viewport);
-
             map.setLevel(currentLevel);
             map.GenerateLevel();
             key.Load();
             player.Load();
+
+            Background = Resources.LoadFile["Background"];
+
+            levelWidth = map.LevelCurrent.Width;
+            levelHeight = map.LevelCurrent.Height;
         }
 
         public override void Update(GameTime gameTime, Game1 game)
@@ -57,8 +69,8 @@ namespace GameProject
             //Collision&CameraMovement
             foreach (CollisionTiles item in map.LevelCurrent.CollisionTiles)
             {
-                player.Collision(item.Rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
-                camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
+                player.Collision(item.Rectangle, map.LevelCurrent.Width, map.LevelCurrent.Height);
+                camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Height);
             }
 
             //collision met fruit
@@ -74,22 +86,35 @@ namespace GameProject
                 }
             }
 
+            //Collision met key
             if (player.rectangle.Intersects(key.rectangle) && Fruit.fruitCount == 0 && currentLevel <= 2)
             {
                 currentLevel++;
-                map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
+                map.setLevel(currentLevel); 
                 map.GenerateLevel();
                 Fruit.fruitCount = 4;
                 Sounds.ananasPickup.Play();
             }
             else if (currentLevel > 2)
             {
-                System.Console.WriteLine("GAME END!!!");
+                camera.Update(new Vector2(0,900),map.LevelCurrent.Width, map.LevelCurrent.Height);
+                game.MenuChange(Game1.gameState.End);
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                currentLevel++;
+            }
+
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            map.DrawLevel(spriteBatch); //Map is null
+            spriteBatch.Begin();
+            spriteBatch.Draw(Background, new Rectangle(0, 0, map.LevelCurrent.Width, map.LevelCurrent.Height), Color.White);
+            spriteBatch.End();
+            
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
+            map.DrawLevel(spriteBatch);
             foreach (Fruit item in map.LevelCurrent.Fruits)
             {
                 item.Draw(spriteBatch);
@@ -97,6 +122,7 @@ namespace GameProject
             key.Draw(spriteBatch);
             player.Draw(spriteBatch);
             base.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

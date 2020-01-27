@@ -16,7 +16,7 @@ namespace GameProject
         private Texture2D texture;      
         Animation FruitIdleAnimation;
         public Rectangle rectangle;
-        public static int fruitCount = 4; //DIT MOET NOG AANGEPAST WORDEN
+        public static int fruitCount = 4;
 
 
 

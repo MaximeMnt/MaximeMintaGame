@@ -10,7 +10,6 @@ namespace GameProject
     //MAXIME MINTA 2EA2-CLOUD
     public class Game1 : Game
     {
-
         public enum gameState
         {
             Playing,
@@ -20,15 +19,8 @@ namespace GameProject
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        //MISC
-        Camera camera;
-        Remote remote;
-
         //MENU
         Menu menu;
-
-        //Font
-        SpriteFont font; 
 
         public Game1()
         {
@@ -40,44 +32,40 @@ namespace GameProject
         {
             if (gs == gameState.Playing)
             {
-                this.menu = new PlayingState(GraphicsDevice, this.camera);
-                
+                this.menu = new PlayingState(GraphicsDevice);
+
             }
             if (gs == gameState.End)
             {
-                this.menu = new MenuEnd(GraphicsDevice, this.camera);
+                this.menu = new MenuEnd(GraphicsDevice);             
             }
             menu.Initialize();
             menu.LoadContent();
         }
-
-        
+ 
         protected override void Initialize()
         {
-            remote = new KeyBoard();          
             base.Initialize(); 
         }
-
 
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            camera = new Camera(GraphicsDevice.Viewport);
-            font = Content.Load<SpriteFont>("File");
            
             //Sprites + sounds inladen
             Resources.LoadImages(Content);
+            Resources.LoadFont(Content);
             Sounds.Load(Content);
 
             //Menu aanmaken
-            menu = new MenuStart(font, GraphicsDevice, this.camera); //Ging niet anders
-            
+            menu = new MenuStart(GraphicsDevice); //Ging niet anders
+            menu.Initialize();
+            menu.LoadContent();
 
             //play background music
-            Sounds.playBackgroundMusic(50);                
+            Sounds.playBackgroundMusic(25);                
         }
-
-        
+       
         protected override void UnloadContent()
         {
         }
@@ -90,13 +78,9 @@ namespace GameProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
 
-            //spriteBatch.Begin();
-            //Enkel dit zou moeten overblijven in de game
             menu.Draw(spriteBatch);
-
-            spriteBatch.End();
+          
             base.Draw(gameTime);
         }
     }

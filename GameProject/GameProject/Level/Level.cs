@@ -25,7 +25,7 @@ namespace GameProject
         private int width, height;
 
         public int Width { get { return width; } }
-        public int Heigt { get { return height; } }
+        public int Height { get { return height; } }
           
 
         public void Generate(int[,] map, int size)
