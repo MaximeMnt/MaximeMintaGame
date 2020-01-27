@@ -19,7 +19,7 @@ namespace GameProject
         {
             frames = new List<AnimationFrame>(); ;
             xOffset = 0;
-           // speed = _speed;
+            //speed = _speed;
         }
 
         //public void AddFrame(Texture2D texture)
@@ -37,7 +37,7 @@ namespace GameProject
         {
             AnimationFrame frame = new AnimationFrame()
             {
-                SourceRectangle = rectangle               
+                SourceRectangle = rectangle
             };
 
             frames.Add(frame);

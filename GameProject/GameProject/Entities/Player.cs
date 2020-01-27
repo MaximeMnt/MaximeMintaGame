@@ -20,7 +20,6 @@ namespace GameProject
         private Vector2 velocity;
         public Rectangle rectangle;
         private SpriteEffects sprEff;
-        public int playerHealth = 0;
         private bool hasJumped = false;
         Remote remote;
 
@@ -47,7 +46,6 @@ namespace GameProject
 
             //Damage
             CreateDamageAnimation();
-
 
         }
         
@@ -119,11 +117,7 @@ namespace GameProject
         }
 
         #endregion
-        public void Respawn()
-        {
-            this.position = new Vector2(0, 900);
-        }
-
+        
         private void Input(GameTime gameTime)
         {
             if (remote.right)
