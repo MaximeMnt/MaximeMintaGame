@@ -11,18 +11,14 @@ namespace GameProject
     public class Game1 : Game
     {
 
-        enum gameState
+        public enum gameState
         {
             Playing,
-            Menu,
             End
-        }
-        gameState currentGameState = gameState.Menu;
-
+        }       
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
         
         //VISUAL
         Map map;
@@ -35,8 +31,10 @@ namespace GameProject
         //ENTITIES
         Player player;
         key key;
-        
-       
+
+        //MENU
+        Menu menu;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -50,6 +48,8 @@ namespace GameProject
             map = new Map(Content);           
             player = new Player(remote);
             key = new key();
+
+            menu = new MenuStart();
             base.Initialize();
             
 
@@ -66,10 +66,11 @@ namespace GameProject
             Tiles.Content = Content;
             Sounds.Load(Content);
            
-            map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
+            map.setLevel(currentLevel);
             map.GenerateLevel();
             key.Load();
             player.Load();
+
             //play background music
             Sounds.playBackgroundMusic(50);                
         }
@@ -80,6 +81,8 @@ namespace GameProject
         }
         protected override void Update(GameTime gameTime)
         {
+          
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -102,6 +105,7 @@ namespace GameProject
                     int Collide = map.LevelCurrent.Fruits.IndexOf(item);
                     map.LevelCurrent.Fruits.RemoveAt(Collide);
                     item.hasTouched();
+                    Sounds.ananasPickup.Play();
                 }           
             }
 
@@ -111,9 +115,9 @@ namespace GameProject
                 map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
                 map.GenerateLevel();
                 Fruit.fruitCount = 4;
+                Sounds.ananasPickup.Play();
             } else if(currentLevel > 2 )
             {
-                currentGameState = gameState.End;
                 System.Console.WriteLine("GAME END!!!");
             }
 
@@ -124,13 +128,18 @@ namespace GameProject
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
-            map.DrawLevel(spriteBatch);
-            foreach (Fruit item in map.LevelCurrent.Fruits)
-            {
-                item.Draw(spriteBatch);
-            }
-            key.Draw(spriteBatch);
-            player.Draw(spriteBatch);
+            //map.DrawLevel(spriteBatch);
+            //foreach (Fruit item in map.LevelCurrent.Fruits)
+            //{
+            //    item.Draw(spriteBatch);
+            //}
+            //key.Draw(spriteBatch);
+            //player.Draw(spriteBatch);
+
+            //Enkel dit zou moeten overblijven in de game
+            menu.Draw(spriteBatch);
+
+
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -83,7 +83,7 @@ namespace GameProject
 
         public void GenerateLevel()
         {
-            background.LoadTexture(Resources.Images["Background"]);
+            background.LoadTexture(Resources.LoadFile["Background"]);
 
             if (LevelCurrent == level1)
             {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GameProject
 {
-    class Background: Game1
+    public class Background: Game1
     {
         //FIELDS
         Texture2D background;

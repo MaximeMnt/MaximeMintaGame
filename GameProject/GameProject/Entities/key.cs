@@ -17,7 +17,7 @@ namespace GameProject
 
         public override void Load()
         {
-            texture = Resources.Images["key"];
+            texture = Resources.LoadFile["key"];
             rectangle = new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height);
         }
 

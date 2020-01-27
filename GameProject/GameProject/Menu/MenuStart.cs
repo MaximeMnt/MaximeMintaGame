@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameProject.Menu
+namespace GameProject
 {
     class MenuStart : Menu
     {
-        public MenuStart(int level) : base(level)
+        public MenuStart()
         {
 
         }

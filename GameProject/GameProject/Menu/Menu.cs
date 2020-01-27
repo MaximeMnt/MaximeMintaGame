@@ -6,23 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameProject.Menu
+namespace GameProject
 {
-    class Menu
+    public abstract class Menu
     {
         protected Background background;
-        protected int level;
+        protected SpriteFont font;
 
-        protected Menu(int _level)
-        {
-            Init();
-            this.level = _level;
-        }
-
-        protected void Init()
+        protected void Init(SpriteFont _font)
         {
             background = new Background();
-            background.LoadTexture(Resources.Images["Background"]);
+            background.LoadTexture(Resources.LoadFile["Background"]);
+            font = _font;
         }
 
         public virtual void Update(GameTime gameTime, Game1 game)
@@ -33,6 +28,7 @@ namespace GameProject.Menu
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             this.background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
+
         }
     }
 }

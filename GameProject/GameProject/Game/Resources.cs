@@ -11,12 +11,12 @@ namespace GameProject
     class Resources
     {
         //FIELDS
-        public static Dictionary<string, Texture2D> Images;
+        public static Dictionary<string, Texture2D> LoadFile;
 
         //LOAD
         public static void LoadImages(ContentManager content)
         {
-            Images = new Dictionary<string, Texture2D>();
+            LoadFile = new Dictionary<string, Texture2D>();
 
             List<string> graphics = new List<string>()
             {
@@ -31,7 +31,7 @@ namespace GameProject
 
             foreach (string item in graphics)
             {
-                Images.Add(item, content.Load<Texture2D>(item));
+                LoadFile.Add(item, content.Load<Texture2D>(item));
             }
         }
     }

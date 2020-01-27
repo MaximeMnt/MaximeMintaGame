@@ -58,7 +58,7 @@ namespace GameProject
 
         public override void Load()
         {
-            texture = Resources.Images["Pineapple/Pineapple10"];
+            texture = Resources.LoadFile["Pineapple/Pineapple10"];
             rectangle = new Rectangle((int)this.position.X, (int)this.position.Y, texture.Width, texture.Height);
         }
         public override void Update(GameTime gameTime)

@@ -13,6 +13,7 @@ namespace GameProject
     {
         //FIELDS
         public static SoundEffect effect;
+        public static SoundEffect ananasPickup;
         public static Song BackgroundMusic;
 
         //LOAD
@@ -20,6 +21,7 @@ namespace GameProject
         {
            effect = content.Load<SoundEffect>("Jump");
            BackgroundMusic = content.Load<Song>("BackgroundMusic");
+            ananasPickup = content.Load<SoundEffect>("AnanasPickup");
         }             
      
         //DRAW

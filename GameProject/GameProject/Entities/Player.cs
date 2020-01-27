@@ -202,7 +202,7 @@ namespace GameProject
         //LOAD,UPDATE,DRAW
         public override void Load()
         {
-            texture = Resources.Images["player"];
+            texture = Resources.LoadFile["player"];
         }
 
         public override void Update(GameTime gameTime)
