@@ -14,12 +14,6 @@ namespace GameProject
         protected Texture2D texture;
         private Rectangle rectangle;
         public Rectangle Rectangle { get { return rectangle; } protected set { rectangle = value; } }
-        private static ContentManager content;
-        public static ContentManager Content
-        {
-            protected get { return content;  }
-            set { content = value; }
-        }
 
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -31,7 +25,7 @@ namespace GameProject
     {
         public CollisionTiles(int i, Rectangle newRectangle)
         {
-            texture = Content.Load<Texture2D>("Tile" + i); //moet naar de Resources klasse...
+            texture = Resources.LoadFile["Tile" + i];
             this.Rectangle = newRectangle;
         }     
     }

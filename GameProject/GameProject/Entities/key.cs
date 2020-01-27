@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameProject
 {
-    class key : Entity
+    class Key : Entity
     {
 
         private Vector2 position = new Vector2(150, 900);

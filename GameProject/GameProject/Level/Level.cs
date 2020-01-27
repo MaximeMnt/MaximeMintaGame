@@ -21,18 +21,12 @@ namespace GameProject
         {
             get { return fruits; }
         }
-        ContentManager content;
 
         private int width, height;
 
         public int Width { get { return width; } }
         public int Heigt { get { return height; } }
           
-
-        public Level(ContentManager _content)
-        {
-            this.content = _content;          
-        }
 
         public void Generate(int[,] map, int size)
         {

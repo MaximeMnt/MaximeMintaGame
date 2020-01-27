@@ -11,9 +11,7 @@ namespace GameProject
 {
     class Map
     {
-        public ContentManager content;
         public Level level1, level2;
-        public Background background;
 
         int[,] level1Array = new int[,] {
             {0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,2 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,0 ,10 },
@@ -57,17 +55,15 @@ namespace GameProject
         public Level LevelCurrent;
 
 
-        public Map(ContentManager _content)
+        public Map()
         {
-            this.content = _content;
             Init();
         }
 
         public void Init()
         {
-            level1 = new Level(content);
-            level2 = new Level(content);
-            background = new Background();
+            level1 = new Level();
+            level2 = new Level();
         }
 
         public void setLevel(int level)
@@ -83,7 +79,6 @@ namespace GameProject
 
         public void GenerateLevel()
         {
-            background.LoadTexture(Resources.LoadFile["Background"]);
 
             if (LevelCurrent == level1)
             {
@@ -97,7 +92,6 @@ namespace GameProject
 
         public void DrawLevel(SpriteBatch spriteBatch)
         {
-            background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
             LevelCurrent.Draw(spriteBatch); 
         }
     }

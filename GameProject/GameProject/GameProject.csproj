@@ -45,7 +45,7 @@
     <Compile Include="Animation\AnimationFrame.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Fruit.cs" />
-    <Compile Include="Entities\key.cs" />
+    <Compile Include="Entities\Key.cs" />
     <Compile Include="Game\Resources.cs" />
     <Compile Include="Game\Background.cs" />
     <Compile Include="Game\KeyBoard.cs" />
@@ -56,6 +56,8 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Game\Sounds.cs" />
     <Compile Include="Menu\MenuEnd.cs" />
+    <Compile Include="Menu\MenuMessages.cs" />
+    <Compile Include="Menu\PlayingState.cs" />
     <Compile Include="Menu\MenuStart.cs" />
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Program.cs" />

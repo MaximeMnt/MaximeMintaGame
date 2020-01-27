@@ -10,7 +10,7 @@ namespace GameProject
 {
     public class Background: Game1
     {
-        //FIELDS
+        //PROPS
         Texture2D background;
         private Vector2 position;
 
@@ -21,10 +21,7 @@ namespace GameProject
             this.background = _texture;
         }
 
-        public Background()
-        {
-
-        }
+        public Background() { }
 
         //LOAD
         public void LoadTexture(Texture2D texture)
@@ -36,7 +33,6 @@ namespace GameProject
         public void Draw(SpriteBatch spriteBatch, Rectangle sourceRectangle)
         {
             spriteBatch.Draw(background, position, sourceRectangle, Color.White, 0, new Vector2(0, 0), 2f, SpriteEffects.None, 0);
-
         }
     }
 }

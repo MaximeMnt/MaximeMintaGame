@@ -12,23 +12,33 @@ namespace GameProject
     {
         protected Background background;
         protected SpriteFont font;
+        protected GraphicsDevice graphicsDevice;
+        public Vector2 position;
+        Camera camera;
+        
 
-        protected void Init(SpriteFont _font)
+        protected Menu(GraphicsDevice _graphicsDevice, Camera _camera)
+        {           
+            this.position = new Vector2(0, 0);
+            this.graphicsDevice = _graphicsDevice;
+            camera = _camera;
+        }
+
+        public virtual void Initialize()
         {
             background = new Background();
-            background.LoadTexture(Resources.LoadFile["Background"]);
-            font = _font;
         }
 
-        public virtual void Update(GameTime gameTime, Game1 game)
+        public virtual void LoadContent()
         {
-
+            background.LoadTexture(Resources.LoadFile["Background"]);
         }
+
+        public abstract void Update(GameTime gameTime, Game1 game);
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            this.background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
-
+            //background.Draw(spriteBatch, new Rectangle(0, 0, 1050, 1400));
         }
     }
 }

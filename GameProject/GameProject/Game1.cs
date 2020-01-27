@@ -19,21 +19,16 @@ namespace GameProject
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        //VISUAL
-        Map map;
-        int currentLevel = 1;
 
         //MISC
         Camera camera;
         Remote remote;
 
-        //ENTITIES
-        Player player;
-        key key;
-
         //MENU
         Menu menu;
+
+        //Font
+        SpriteFont font; 
 
         public Game1()
         {
@@ -41,18 +36,26 @@ namespace GameProject
             Content.RootDirectory = "Content";
         }
 
+        public void MenuChange(gameState gs)
+        {
+            if (gs == gameState.Playing)
+            {
+                this.menu = new PlayingState(GraphicsDevice, this.camera);
+                
+            }
+            if (gs == gameState.End)
+            {
+                this.menu = new MenuEnd(GraphicsDevice, this.camera);
+            }
+            menu.Initialize();
+            menu.LoadContent();
+        }
+
         
         protected override void Initialize()
         {
-            remote = new KeyBoard();
-            map = new Map(Content);           
-            player = new Player(remote);
-            key = new key();
-
-            menu = new MenuStart();
-            base.Initialize();
-            
-
+            remote = new KeyBoard();          
+            base.Initialize(); 
         }
 
 
@@ -60,16 +63,15 @@ namespace GameProject
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             camera = new Camera(GraphicsDevice.Viewport);
-
-            //content meegeven aan tiles
-            Resources.LoadImages(Content);
-            Tiles.Content = Content;
-            Sounds.Load(Content);
+            font = Content.Load<SpriteFont>("File");
            
-            map.setLevel(currentLevel);
-            map.GenerateLevel();
-            key.Load();
-            player.Load();
+            //Sprites + sounds inladen
+            Resources.LoadImages(Content);
+            Sounds.Load(Content);
+
+            //Menu aanmaken
+            menu = new MenuStart(font, GraphicsDevice, this.camera); //Ging niet anders
+            
 
             //play background music
             Sounds.playBackgroundMusic(50);                
@@ -80,68 +82,21 @@ namespace GameProject
         {
         }
         protected override void Update(GameTime gameTime)
-        {
-          
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            player.Update(gameTime);
-            key.Update(gameTime);
-
-            //Collision&CameraMovement
-            foreach (CollisionTiles item in map.LevelCurrent.CollisionTiles)
-            {
-                player.Collision(item.Rectangle, map.LevelCurrent.Width, map.LevelCurrent.Heigt);
-                camera.Update(player.Position, map.LevelCurrent.Width, map.LevelCurrent.Heigt);                         
-            }
-
-            //collision met fruit
-            foreach (Fruit item in map.LevelCurrent.Fruits.ToArray())
-            {
-                item.Update(gameTime);
-                if (player.rectangle.Intersects(item.rectangle))
-                {
-                    int Collide = map.LevelCurrent.Fruits.IndexOf(item);
-                    map.LevelCurrent.Fruits.RemoveAt(Collide);
-                    item.hasTouched();
-                    Sounds.ananasPickup.Play();
-                }           
-            }
-
-            if (player.rectangle.Intersects(key.rectangle) && Fruit.fruitCount == 0 && currentLevel <= 2)
-            {
-                currentLevel++;
-                map.setLevel(currentLevel); //welklevel mag niet gehardcoded worden
-                map.GenerateLevel();
-                Fruit.fruitCount = 4;
-                Sounds.ananasPickup.Play();
-            } else if(currentLevel > 2 )
-            {
-                System.Console.WriteLine("GAME END!!!");
-            }
-
+        {      
+            menu.Update(gameTime,this);
             base.Update(gameTime);
         }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred,BlendState.AlphaBlend,null,null,null,null,camera.Transform);
-            //map.DrawLevel(spriteBatch);
-            //foreach (Fruit item in map.LevelCurrent.Fruits)
-            //{
-            //    item.Draw(spriteBatch);
-            //}
-            //key.Draw(spriteBatch);
-            //player.Draw(spriteBatch);
-
+            //spriteBatch.Begin();
             //Enkel dit zou moeten overblijven in de game
             menu.Draw(spriteBatch);
 
-
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }
