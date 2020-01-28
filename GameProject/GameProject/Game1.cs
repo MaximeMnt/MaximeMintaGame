@@ -54,7 +54,7 @@ namespace GameProject
             Sounds.Load(Content);
 
             //Menu aanmaken
-            menu = new MenuStart(GraphicsDevice); //Ging niet anders
+            menu = new MenuStart(GraphicsDevice); //Ging niet anders (zonder grote refactor)
             menu.Initialize();
             menu.LoadContent();
 
@@ -73,9 +73,7 @@ namespace GameProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            menu.Draw(spriteBatch);
-          
+            menu.Draw(spriteBatch);       
             base.Draw(gameTime);
         }
     }

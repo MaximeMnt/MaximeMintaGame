@@ -6,7 +6,6 @@ namespace GameProject
 {
     class Player : Entity
     {
-        Animation runAnimation, animationIdle, currentAnimation;
         private Texture2D texture;
         private Vector2 position = new Vector2(0,900);
         private Vector2 velocity;
@@ -23,51 +22,20 @@ namespace GameProject
         public Player(Remote _remote)
         {           
             this.remote = _remote;
-
             //LOOP ANIMATIE
-            //PlayerAnimation.CreateRunAnimation();
-            CreateRunAnimation();
+            PlayerAnimation.CreateRunAnimation();
             //IDLE ANIMATION
-            //PlayerAnimation.CreateAnimationIdle();
-            CreateAnimationIdle();
-            //currentAnimation = animationIdle;
-        }
-
-        #region Create Animation
-
-        private void CreateAnimationIdle()
-        {
-            animationIdle = new Animation(70);
-            animationIdle.AddFrame(new Rectangle(0, 0, 24, 24));
-            animationIdle.AddFrame(new Rectangle(24, 0, 24, 24));
-            animationIdle.AddFrame(new Rectangle(48, 0, 24, 24));
-            animationIdle.AddFrame(new Rectangle(72, 0, 24, 24));
-
-            currentAnimation = animationIdle;
-
-        }
-        private void CreateRunAnimation()
-        {
-            runAnimation = new Animation(50);
-            runAnimation.AddFrame(new Rectangle(96, 0, 24, 24));
-            runAnimation.AddFrame(new Rectangle(120, 0, 24, 24));
-            runAnimation.AddFrame(new Rectangle(144, 0, 24, 24));
-            runAnimation.AddFrame(new Rectangle(168, 0, 24, 24));
-            runAnimation.AddFrame(new Rectangle(192, 0, 24, 24));
-            runAnimation.AddFrame(new Rectangle(216, 0, 24, 24));
-
-            currentAnimation = runAnimation;
-        }
-        #endregion
+            PlayerAnimation.CreateAnimationIdle();           
+        }      
 
         private void Input(GameTime gameTime)
         {
             if (remote.Right)
             {
                 velocity.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
-
+                
                 //ASSIGN ANIMATIONS
-                currentAnimation = runAnimation;
+                PlayerAnimation.currentAnimation = PlayerAnimation.runAnimation;
                 
                 sprEff = SpriteEffects.None;
             }
@@ -76,7 +44,7 @@ namespace GameProject
                 velocity.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
 
                 //ASSIGN ANIMATIONS
-                currentAnimation = runAnimation;
+                PlayerAnimation.currentAnimation = PlayerAnimation.runAnimation;
                 sprEff = SpriteEffects.FlipHorizontally;
             }
             else velocity.X = 0f;
@@ -92,7 +60,7 @@ namespace GameProject
 
             if (remote.Idle)
             {
-                currentAnimation = animationIdle;
+                PlayerAnimation.currentAnimation = PlayerAnimation.animationIdle;
             }
         }    
 
@@ -145,7 +113,7 @@ namespace GameProject
         public override void Update(GameTime gameTime)
         {
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, currentAnimation.currentFrame.SourceRectangle.Width+10, currentAnimation.currentFrame.SourceRectangle.Height+20); //updaten van de rectangle
+            rectangle = new Rectangle((int)position.X, (int)position.Y, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle.Width+10, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle.Height+20); //updaten van de rectangle
             //update Input
             Input(gameTime);
             remote.Update();
@@ -155,12 +123,12 @@ namespace GameProject
                 velocity.Y += 0.4f;
             }
             //updaten van animation
-            currentAnimation.Update(gameTime);
+            PlayerAnimation.currentAnimation.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, currentAnimation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 2, sprEff, 1);
+            spriteBatch.Draw(texture, position, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 2, sprEff, 1);
         }
     }
 

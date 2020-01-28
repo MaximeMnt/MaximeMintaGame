@@ -17,7 +17,6 @@ namespace GameProject
         //MISC
         Camera camera;
         Remote remote;
-
         GraphicsDevice graphicsDevice;
 
         //Background
@@ -38,9 +37,6 @@ namespace GameProject
             player = new Player(remote);
             key = new Key();
             this.camera = new Camera(graphicsDevice.Viewport);
-
-
-
         }
 
         public override void LoadContent()

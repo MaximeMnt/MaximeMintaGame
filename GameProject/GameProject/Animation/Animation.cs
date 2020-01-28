@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GameProject
 {
-    class Animation
+    public class Animation
     {
         private List<AnimationFrame> frames;
         public AnimationFrame currentFrame;
