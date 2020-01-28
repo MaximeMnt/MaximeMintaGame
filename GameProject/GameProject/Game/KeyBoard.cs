@@ -1,20 +1,15 @@
 ﻿using Microsoft.Xna.Framework.Input;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameProject
 {
     public abstract class Remote
     {
-        public bool left { get; set; }
-        public bool right { get; set; }
-        public bool idle { get; set; }
-        public bool sprint { get; set; }
-        public bool jump { get; set; }
-        public bool duck { get; set; }
+        public bool Left { get; set; }
+        public bool Right { get; set; }
+        public bool Idle { get; set; }
+        public bool Sprint { get; set; }
+        public bool Jump { get; set; }
+        public bool Duck { get; set; }
         public abstract void Update();
     }
 
@@ -26,54 +21,54 @@ namespace GameProject
             KeyboardState stateKey = Keyboard.GetState();
             if (stateKey.IsKeyDown(Keys.RightShift))
             {
-                sprint = true;
+                Sprint = true;
             }
             if (stateKey.IsKeyUp(Keys.RightShift))
             {
-                sprint = false;
+                Sprint = false;
             }
             if (stateKey.IsKeyDown(Keys.Left))
             {
-                left = true;
-                idle = false;
+                Left = true;
+                Idle = false;
             }
             if (stateKey.IsKeyUp(Keys.Left))
             {
-                left = false;
-                idle = false;
+                Left = false;
+                Idle = false;
             }
 
             if (stateKey.IsKeyDown(Keys.Right))
             {
-                right = true;
-                idle = false;
+                Right = true;
+                Idle = false;
             }
             if (stateKey.IsKeyUp(Keys.Right))
             {
-                right = false;
-                idle = false;
+                Right = false;
+                Idle = false;
             }
             if (stateKey.GetPressedKeys().Length == 0)
             {
-                idle = true;
+                Idle = true;
             }
             if (stateKey.IsKeyDown(Keys.Up))
             {
                 //jump
-                jump = true;
+                Jump = true;
             }
             if (stateKey.IsKeyUp(Keys.Up))
             {
-                jump = false;
+                Jump = false;
             }
             if (stateKey.IsKeyDown(Keys.Down))
             {
                 //bukken
-                duck = true;                
+                Duck = true;                
             }
             if (stateKey.IsKeyUp(Keys.Down))
             {
-                duck = false;
+                Duck = false;
             }
 
             

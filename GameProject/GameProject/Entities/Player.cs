@@ -1,13 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameProject
 {
@@ -120,7 +113,7 @@ namespace GameProject
         
         private void Input(GameTime gameTime)
         {
-            if (remote.right)
+            if (remote.Right)
             {
                 velocity.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
 
@@ -128,7 +121,7 @@ namespace GameProject
                 currentAnimation = runAnimation;
                 sprEff = SpriteEffects.None;
             }
-            else if (remote.left)
+            else if (remote.Left)
             {
                 velocity.X = -(float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
 
@@ -139,7 +132,7 @@ namespace GameProject
             else velocity.X = 0f;
 
 
-            if (remote.jump && hasJumped == false)
+            if (remote.Jump && hasJumped == false)
             {
                 position.Y -= 5f;
                 velocity.Y = -9f;
@@ -147,7 +140,7 @@ namespace GameProject
                 Sounds.effect.Play(0.5f, 0, 0); //Jumpsound
             }
 
-            if (remote.idle)
+            if (remote.Idle)
             {
                 currentAnimation = animationIdle;
             }
@@ -224,6 +217,7 @@ namespace GameProject
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            //spriteBatch.Draw(texture,position,rectangle,Color.White,0f,new Vector2(0,0),0f,this.sprEff,1);
             spriteBatch.Draw(texture, rectangle, Color.White);
         }
 

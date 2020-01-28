@@ -1,9 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-using System.Collections.Generic;
 
 namespace GameProject
 {
@@ -63,7 +59,7 @@ namespace GameProject
             menu.LoadContent();
 
             //play background music
-            Sounds.playBackgroundMusic(25);                
+            Sounds.playBackgroundMusic(0.5f);                
         }
        
         protected override void UnloadContent()
