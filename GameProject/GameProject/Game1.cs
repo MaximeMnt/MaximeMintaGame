@@ -6,11 +6,7 @@ namespace GameProject
     //MAXIME MINTA 2EA2-CLOUD
     public class Game1 : Game
     {
-        public enum gameState
-        {
-            Playing,
-            End
-        }       
+        public enum gameState { Playing,End }       
 
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -41,6 +37,7 @@ namespace GameProject
  
         protected override void Initialize()
         {
+            menu = new MenuStart(GraphicsDevice);
             base.Initialize(); 
         }
 
@@ -54,7 +51,6 @@ namespace GameProject
             Sounds.Load(Content);
 
             //Menu aanmaken
-            menu = new MenuStart(GraphicsDevice); //Ging niet anders (zonder grote refactor)
             menu.Initialize();
             menu.LoadContent();
 

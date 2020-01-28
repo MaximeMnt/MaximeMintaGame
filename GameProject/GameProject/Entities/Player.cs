@@ -35,8 +35,7 @@ namespace GameProject
                 velocity.X = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 3;
                 
                 //ASSIGN ANIMATIONS
-                PlayerAnimation.currentAnimation = PlayerAnimation.runAnimation;
-                
+                PlayerAnimation.currentAnimation = PlayerAnimation.runAnimation;               
                 sprEff = SpriteEffects.None;
             }
             else if (remote.Left)
@@ -71,7 +70,6 @@ namespace GameProject
                 rectangle.Y = newRectangle.Y - rectangle.Height;
                 velocity.Y = 0f;
                 hasJumped = false;
-
             }
             if (rectangle.touchLeftOf(newRectangle))
             {
@@ -97,7 +95,6 @@ namespace GameProject
             {
                 position.Y = yOffset - rectangle.Height;
             }
-
             if (position.X > xOffset - rectangle.Width)
             {
                 position.X = xOffset - rectangle.Width;
@@ -113,7 +110,7 @@ namespace GameProject
         public override void Update(GameTime gameTime)
         {
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle.Width+10, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle.Height+20); //updaten van de rectangle
+            rectangle = new Rectangle((int)position.X, (int)position.Y, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle.Width+10, PlayerAnimation.currentAnimation.currentFrame.SourceRectangle.Height+20);
             //update Input
             Input(gameTime);
             remote.Update();

@@ -18,24 +18,12 @@ namespace GameProject
             speed = _speed;
         }
 
-        //public void AddFrame(Texture2D texture)
-        //{
-        //    AnimationFrame frame = new AnimationFrame()
-        //    {
-        //        SourceRectangle = new Rectangle(0, 0, texture.Width, texture.Height),
-        //        SourceTexture = texture
-        //    };
-        //    frames.Add(frame);
-        //    currentFrame = frames[0];
-        //}
-
         public void AddFrame(Rectangle rectangle)
         {
             AnimationFrame frame = new AnimationFrame()
             {
                 SourceRectangle = rectangle
             };
-
             frames.Add(frame);
             currentFrame = frames[0];
         }
@@ -48,7 +36,6 @@ namespace GameProject
                 counter++;
                 if (counter >= frames.Count)
                     counter = 0;
-
                 currentFrame = frames[counter];
                 xOffset = 0;
             }

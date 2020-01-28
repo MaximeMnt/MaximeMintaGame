@@ -19,9 +19,6 @@ namespace GameProject
         Remote remote;
         GraphicsDevice graphicsDevice;
 
-        //Background
-        Texture2D Background;
-
         //levelwidth & Heigt
         public static int levelWidth;
         public static int levelHeight;
@@ -46,7 +43,7 @@ namespace GameProject
             key.Load();
             player.Load();
 
-            Background = Resources.LoadFile["Background"];
+            background = Resources.LoadFile["Background"];
 
             levelWidth = map.LevelCurrent.Width;
             levelHeight = map.LevelCurrent.Height;
@@ -88,20 +85,14 @@ namespace GameProject
             }
             else if (currentLevel > 2)
             {
-                camera.Update(new Vector2(0,900),map.LevelCurrent.Width, map.LevelCurrent.Height);
                 game.MenuChange(Game1.gameState.End);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                currentLevel++;
             }
 
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(Background, new Rectangle(0, 0, map.LevelCurrent.Width, map.LevelCurrent.Height), Color.White);
+            spriteBatch.Draw(background, new Rectangle(0, 0, map.LevelCurrent.Width, map.LevelCurrent.Height), Color.White);
             spriteBatch.End();
             
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, camera.Transform);

@@ -47,7 +47,6 @@ namespace GameProject
 
         public Level LevelCurrent;
 
-
         public Map()
         {
             Init();
@@ -71,15 +70,13 @@ namespace GameProject
         }
 
         public void GenerateLevel()
-        {
-
+        {       
             if (LevelCurrent == level1)
             {
                 level1.Generate(level1Array, 64);
             } else if(LevelCurrent == level2)
             {
                 level2.Generate(level2Array, 64);
-
             } 
         }
 

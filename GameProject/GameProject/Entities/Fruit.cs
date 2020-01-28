@@ -11,14 +11,11 @@ namespace GameProject
         public Rectangle rectangle;
         public static int fruitCount = 4;
 
-
-
         public Fruit(Vector2 _position)
         {            
             Load();
             this.position = _position;
         }
-
 
         public void hasTouched()
         {

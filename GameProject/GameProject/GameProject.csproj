@@ -50,6 +50,7 @@
     <Compile Include="Game\Resources.cs" />
     <Compile Include="Game\Background.cs" />
     <Compile Include="Game\KeyBoard.cs" />
+    <Compile Include="Level\CollisionTiles.cs" />
     <Compile Include="Level\Level.cs" />
     <Compile Include="Game\Camera.cs" />
     <Compile Include="Game1.cs" />

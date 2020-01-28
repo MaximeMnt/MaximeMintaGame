@@ -6,11 +6,9 @@ namespace GameProject
 {
     class Resources
     {
-        //FIELDS
         public static Dictionary<string, Texture2D> LoadFile;
         public static SpriteFont font;
 
-        //LOAD
         public static void LoadImages(ContentManager content)
         {
             LoadFile = new Dictionary<string, Texture2D>();

@@ -5,20 +5,15 @@ namespace GameProject
 {
     public abstract class Menu
     {
-        protected GraphicsDevice graphicsDevice;
-        
-        protected Menu(GraphicsDevice _graphicsDevice)
-        {
-            this.graphicsDevice = _graphicsDevice;
-            
-        }
+        protected Texture2D background;
+        protected Menu(GraphicsDevice _graphicsDevice){  }
 
-        public virtual void Initialize() { }       
+        public virtual void Initialize() { }
 
-        public virtual void LoadContent() { }
+        public virtual void LoadContent() {  }
 
         public abstract void Update(GameTime gameTime, Game1 game);
 
-        public virtual void Draw(SpriteBatch spriteBatch) { }
+        public virtual void Draw(SpriteBatch spriteBatch){  }
     }
 }

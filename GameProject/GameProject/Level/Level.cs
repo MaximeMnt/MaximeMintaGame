@@ -21,7 +21,6 @@ namespace GameProject
         public int Width { get { return width; } }
         public int Height { get { return height; } }
           
-
         public void Generate(int[,] map, int size)
         {
             for (int x = 0; x < map.GetLength(1); x++)

@@ -7,9 +7,7 @@ namespace GameProject
         public bool Left { get; set; }
         public bool Right { get; set; }
         public bool Idle { get; set; }
-        public bool Sprint { get; set; }
         public bool Jump { get; set; }
-        public bool Duck { get; set; }
         public abstract void Update();
     }
 
@@ -19,14 +17,6 @@ namespace GameProject
         public override void Update()
         {
             KeyboardState stateKey = Keyboard.GetState();
-            if (stateKey.IsKeyDown(Keys.RightShift))
-            {
-                Sprint = true;
-            }
-            if (stateKey.IsKeyUp(Keys.RightShift))
-            {
-                Sprint = false;
-            }
             if (stateKey.IsKeyDown(Keys.Left))
             {
                 Left = true;
@@ -54,24 +44,12 @@ namespace GameProject
             }
             if (stateKey.IsKeyDown(Keys.Up))
             {
-                //jump
                 Jump = true;
             }
             if (stateKey.IsKeyUp(Keys.Up))
             {
                 Jump = false;
             }
-            if (stateKey.IsKeyDown(Keys.Down))
-            {
-                //bukken
-                Duck = true;                
-            }
-            if (stateKey.IsKeyUp(Keys.Down))
-            {
-                Duck = false;
-            }
-
-            
         }
     }
 }

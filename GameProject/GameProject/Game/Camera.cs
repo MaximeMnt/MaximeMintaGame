@@ -43,10 +43,7 @@ namespace GameProject
             }
             else center.Y = position.Y;
 
-
-
             transform = Matrix.CreateTranslation(new Vector3(-center.X + (viewPort.Width / 2), -center.Y +(viewPort.Height/2),0));
-
         }
     }
 }
