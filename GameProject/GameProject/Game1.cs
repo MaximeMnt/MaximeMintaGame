@@ -62,9 +62,8 @@ namespace GameProject
             Sounds.playBackgroundMusic(0.5f);                
         }
        
-        protected override void UnloadContent()
-        {
-        }
+        protected override void UnloadContent(){  }
+
         protected override void Update(GameTime gameTime)
         {      
             menu.Update(gameTime,this);

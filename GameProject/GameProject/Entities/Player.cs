@@ -6,8 +6,7 @@ namespace GameProject
 {
     class Player : Entity
     {
-        //FIELDS
-        Animation runAnimation, animationIdle, duckAnimation, duckIdleAnimation, damageAnimation, currentAnimation;
+        Animation runAnimation, animationIdle, currentAnimation;
         private Texture2D texture;
         private Vector2 position = new Vector2(0,900);
         private Vector2 velocity;
@@ -16,42 +15,29 @@ namespace GameProject
         private bool hasJumped = false;
         Remote remote;
 
-        //GETTERS
         public Vector2 Position
         {
             get { return position; }
         }
 
-        //CONSTRUCTOR
         public Player(Remote _remote)
         {           
             this.remote = _remote;
-            
+
             //LOOP ANIMATIE
+            //PlayerAnimation.CreateRunAnimation();
             CreateRunAnimation();
-
             //IDLE ANIMATION
+            //PlayerAnimation.CreateAnimationIdle();
             CreateAnimationIdle();
-
-            //bukken
-            CreateDuckAnimation();
-            CreateDuckIdleAnimation();          
-
-            //Damage
-            CreateDamageAnimation();
-
+            //currentAnimation = animationIdle;
         }
-        
+
         #region Create Animation
 
         private void CreateAnimationIdle()
         {
-            animationIdle = new Animation(50);
-            //animationIdle.AddFrame(content.Load<Texture2D>("idle1"));
-            //animationIdle.AddFrame(content.Load<Texture2D>("idle2"));
-            //animationIdle.AddFrame(content.Load<Texture2D>("idle3"));
-            //animationIdle.AddFrame(content.Load<Texture2D>("idle4"));
-
+            animationIdle = new Animation(70);
             animationIdle.AddFrame(new Rectangle(0, 0, 24, 24));
             animationIdle.AddFrame(new Rectangle(24, 0, 24, 24));
             animationIdle.AddFrame(new Rectangle(48, 0, 24, 24));
@@ -60,57 +46,20 @@ namespace GameProject
             currentAnimation = animationIdle;
 
         }
-
         private void CreateRunAnimation()
         {
             runAnimation = new Animation(50);
-            runAnimation.AddFrame(new Rectangle(96, 0, 24, 24));//1e is welk mannetje, 2e is welke rij, 3e is de breedte, 4e is de hoogte
+            runAnimation.AddFrame(new Rectangle(96, 0, 24, 24));
             runAnimation.AddFrame(new Rectangle(120, 0, 24, 24));
             runAnimation.AddFrame(new Rectangle(144, 0, 24, 24));
             runAnimation.AddFrame(new Rectangle(168, 0, 24, 24));
             runAnimation.AddFrame(new Rectangle(192, 0, 24, 24));
             runAnimation.AddFrame(new Rectangle(216, 0, 24, 24));
 
-
             currentAnimation = runAnimation;
-
         }
-
-        private void CreateDuckAnimation()
-        {
-            duckAnimation = new Animation(50);
-            duckAnimation.AddFrame(new Rectangle(409, 0, 24, 24));
-            duckAnimation.AddFrame(new Rectangle(433, 0, 24, 24));
-            duckAnimation.AddFrame(new Rectangle(457, 0, 24, 24));
-            duckAnimation.AddFrame(new Rectangle(481, 0, 24, 24));
-            duckAnimation.AddFrame(new Rectangle(505, 0, 24, 24));
-            duckAnimation.AddFrame(new Rectangle(529, 0, 24, 24));
-            duckAnimation.AddFrame(new Rectangle(553, 0, 24, 24));
-
-            currentAnimation = duckAnimation;
-        }
-
-        private void CreateDuckIdleAnimation()
-        {
-            duckIdleAnimation = new Animation(50);
-            duckIdleAnimation.AddFrame(new Rectangle(433, 0, 24, 24));
-
-            currentAnimation = duckAnimation;
-        }
-
-        private void CreateDamageAnimation()
-        {
-            damageAnimation = new Animation(50);
-            damageAnimation.AddFrame(new Rectangle(360, 0, 24, 24));
-            damageAnimation.AddFrame(new Rectangle(384, 0, 24, 24));
-            damageAnimation.AddFrame(new Rectangle(408, 0, 24, 24));
-
-            currentAnimation = damageAnimation;
-
-        }
-
         #endregion
-        
+
         private void Input(GameTime gameTime)
         {
             if (remote.Right)
@@ -119,6 +68,7 @@ namespace GameProject
 
                 //ASSIGN ANIMATIONS
                 currentAnimation = runAnimation;
+                
                 sprEff = SpriteEffects.None;
             }
             else if (remote.Left)
@@ -189,38 +139,29 @@ namespace GameProject
         //LOAD,UPDATE,DRAW
         public override void Load()
         {
-            texture = Resources.LoadFile["player"];
+            texture = Resources.LoadFile["vita"];
         }
 
         public override void Update(GameTime gameTime)
         {
-
             position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height); //updaten van de rectangle
-            Console.WriteLine("player: " + rectangle);
+            rectangle = new Rectangle((int)position.X, (int)position.Y, currentAnimation.currentFrame.SourceRectangle.Width+10, currentAnimation.currentFrame.SourceRectangle.Height+20); //updaten van de rectangle
             //update Input
             Input(gameTime);
             remote.Update();
 
             if (velocity.Y < 10)
             {
-
                 velocity.Y += 0.4f;
             }
             //updaten van animation
             currentAnimation.Update(gameTime);
-           
-
-
-
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture,position,rectangle,Color.White,0f,new Vector2(0,0),0f,this.sprEff,1);
-            spriteBatch.Draw(texture, rectangle, Color.White);
+            spriteBatch.Draw(texture, position, currentAnimation.currentFrame.SourceRectangle, Color.White, 0f, new Vector2(0, 0), 2, sprEff, 1);
         }
-
     }
 
 }

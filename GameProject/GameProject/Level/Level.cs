@@ -18,7 +18,6 @@ namespace GameProject
         }
 
         private int width, height;
-
         public int Width { get { return width; } }
         public int Height { get { return height; } }
           
@@ -37,7 +36,6 @@ namespace GameProject
                     if (number == 10)
                     {                      
                         fruits.Add(new Fruit(new Vector2(x * size, y * size)));
-
                     }
                     width = (x + 1) * size;
                     height = (y + 1) * size;
@@ -51,13 +49,10 @@ namespace GameProject
             {
                 item.Draw(spriteBatch);
             }
-
             foreach (Fruit item in fruits)
             {                
                 item.Draw(spriteBatch);
             }
         }
-
-
     }
 }

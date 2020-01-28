@@ -15,7 +15,7 @@ namespace GameProject
         {
             frames = new List<AnimationFrame>(); ;
             xOffset = 0;
-            //speed = _speed;
+            speed = _speed;
         }
 
         //public void AddFrame(Texture2D texture)
@@ -42,7 +42,7 @@ namespace GameProject
 
         public void Update(GameTime gameTime)
         {
-            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / 180;
+            xOffset += currentFrame.SourceRectangle.Width * gameTime.ElapsedGameTime.Milliseconds / speed;
             if (xOffset >= currentFrame.SourceRectangle.Width)
             {
                 counter++;

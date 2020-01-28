@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Animation\Animation.cs" />
     <Compile Include="Animation\AnimationFrame.cs" />
+    <Compile Include="Animation\PlayerAnimation.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Fruit.cs" />
     <Compile Include="Entities\Key.cs" />
